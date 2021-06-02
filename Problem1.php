@@ -26,10 +26,10 @@ if(isset($_POST['submit'])){
 
     if(!array_filter($errors)){
         $numSumFlag = False;
-        $numSum = htmlspecialchars($_POST['sumNum']) + 0;
+        $numSum = intval(htmlspecialchars($_POST['sumNum']));
         $numArray = explode(',', $_POST['numList']);
         foreach($numArray as $num){
-            $cleanNumArray[] = htmlspecialchars(trim($num)) + 0;
+            $cleanNumArray[] = intval(htmlspecialchars(trim($num)));
         }
         
         for($i = 0; $i < count($cleanNumArray); $i++){
@@ -77,7 +77,7 @@ if(isset($_POST['submit'])){
                     <div class="text-danger p-2">
                     <?php echo $errors['firstNum']; ?>
                     </div>
-                    <label class="form-label">Enter a list of numbers to compare:</label>
+                    <label class="form-label">Enter a list of comma separated numbers:</label>
                     <input type="text" class="form-control" name="numList" value="<?php echo htmlspecialchars($_POST['numList']) ?? '' ?>">
                     <div class="text-danger p-2">
                     <?php echo $errors['secondNum']; ?>
