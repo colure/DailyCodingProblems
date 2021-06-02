@@ -29,6 +29,7 @@ if(isset($_POST['submit'])){
         $numSum = intval(htmlspecialchars($_POST['sumNum']));
         $numArray = explode(',', $_POST['numList']);
         foreach($numArray as $num){
+
             $cleanNumArray[] = intval(htmlspecialchars(trim($num)));
         }
         
@@ -73,12 +74,14 @@ if(isset($_POST['submit'])){
             <div class="col-lg-4">
                 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
                     <label class="form-label">Enter a number [k]:</label>
-                    <input type="text" class="form-control" name="sumNum" value="<?php echo htmlspecialchars($_POST['sumNum']) ?? '' ?>">
+                    <input type="text" class="form-control" name="sumNum" value="<?php if(!empty($_POST['sumNum'])) { echo htmlspecialchars($_POST['sumNum']) ?? '' ;}?>">
                     <div class="text-danger p-2">
-                    <?php echo $errors['firstNum']; ?>
+                    <?php if(!empty($errors['firstNum'])) {
+                        echo $errors['firstNum'];
+                    } ?>
                     </div>
                     <label class="form-label">Enter a list of comma separated numbers:</label>
-                    <input type="text" class="form-control" name="numList" value="<?php echo htmlspecialchars($_POST['numList']) ?? '' ?>">
+                    <input type="text" class="form-control" name="numList" value="<?php if(!empty($_POST['numList'])) { echo htmlspecialchars($_POST['numList']) ?? '' ;}?>">
                     <div class="text-danger p-2">
                     <?php echo $errors['secondNum']; ?>
                     </div>
